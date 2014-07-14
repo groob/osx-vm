@@ -4,6 +4,9 @@ node 'default' {
     provider => "pkgdmg",
     source   => "/Users/vagrant/Desktop/VMware Shared Folders/-vagrant/munkitools2-latest.pkg",
   }
+  package {"r10k":
+    provider => "gem",
+  }
   host { 'munki':
     ensure => present,
     ip     => "192.168.179.1",
@@ -22,5 +25,29 @@ node 'default' {
   }
   exec {"/usr/bin/defaults write /Library/Preferences/ManagedInstalls.plist ClientIdentifier \"testvm\"" :
     require     => Package['munkitools'],
+  }
+  file {'/Users/Shared/r10k':
+    ensure => directory,
+    owner  => 'vagrant',
+    group  => 'admin',
+    mode   => '755',
+  }
+  file {'/Users/Shared/r10k/environments':
+    ensure => directory,
+    owner  => 'vagrant',
+    group  => 'admin',
+    mode   => '755',
+  }
+  file {'/Users/Shared/r10k/cache':
+    ensure => directory,
+    owner  => 'vagrant',
+    group  => 'admin',
+    mode   => '755',
+  }
+  file {'/Users/Shared/r10k/hieradata':
+    ensure => directory,
+    owner  => 'vagrant',
+    group  => 'admin',
+    mode   => '755',
   }
 }

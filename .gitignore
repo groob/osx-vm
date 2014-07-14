@@ -1,3 +1,5 @@
 *.pkg
 *.dmg
 .vagrant
+/environments
+/hieradata
